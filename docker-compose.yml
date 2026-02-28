@@ -5,9 +5,9 @@ services:
     restart: always
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: passsword
-      
+      MONGODB_INITDB_ROOT_USERNAME: root
+      MONGODB_INITDB_ROOT_PASSWORD: passsword
+
     volumes:
       - data:/data/db
     ports:
