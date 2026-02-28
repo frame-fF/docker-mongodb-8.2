@@ -10,6 +10,8 @@ services:
 
     volumes:
       - data:/data/db
+      - config:/data/configdb
+
     ports:
       - 27017:27017
   
@@ -17,12 +19,16 @@ services:
     image: docker.io/mongodb/mongodb-community-server:8.2-ubi8
     depends_on:
       - mongodb
+    tmpfs:
+      - /data/db
+      - /data/configdb
     command: >
       bash -c "sleep 5 && mongosh --host mongodb:27017 --eval \"try { rs.status().ok } catch (e) { rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'mongodb:27017' } ]}) }\""
     restart: "no"
   
 volumes:
   data:
+  config:
 
 networks:
   default:
