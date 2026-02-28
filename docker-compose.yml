@@ -1,16 +1,20 @@
 services:
   mongodb:
     container_name: mongodb-8.2
-    image: docker.io/mongodb/mongodb-community-server:7.0-ubi9
+    image: docker.io/mongodb/mongodb-community-server:8.2-ubi8
     restart: always
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    # environment:
+    #   MONGODB_INITDB_ROOT_USERNAME: root
+    #   MONGODB_INITDB_ROOT_PASSWORD: passsword
+
     volumes:
       - data:/data/db
     ports:
       - 27017:27017
   
   mongo-init:
-    image: docker.io/mongodb/mongodb-community-server:7.0-ubi9
+    image: docker.io/mongodb/mongodb-community-server:8.2-ubi8
     depends_on:
       - mongodb
     command: >
